@@ -6,6 +6,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    var lastResult = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val dice = Dice(6)
         val diceRoll = dice.roll()
 
+
         // Find the ImageView in the layout
         val diceImage: ImageView = findViewById(R.id.imageView)
 
@@ -35,6 +38,12 @@ class MainActivity : AppCompatActivity() {
             4 -> R.drawable.dice_4
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
+        }
+
+        // this code avoid repeat the same values
+        if (drawableResource == lastResult) {
+            lastResult = drawableResource
+            rollDice()
         }
 
         // Update the ImageView with the correct drawable resource ID
